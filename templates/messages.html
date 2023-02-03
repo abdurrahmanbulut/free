@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Message Page</title>
+    <link rel="stylesheet" type="text/css" href="../static/style.css" />
+  </head>
+  <body>
+    <div class="content">
+      <div class="boxes" style="display: flex; align-items: center; justify-content: center;">
+        <div class="container">
+
+          <h1>Secret Message</h1>
+          <p>Welcome, <span id="username">{{user_displayName}}</span></p>
+          <form action="/add_message" method="post" id="login-form">
+
+          <div id="message-form">
+            <textarea id="message-input" name="message"></textarea>
+            <button id="submit-button" type="submit">Submit</button>
+          </div>
+        </form>
+        </div>
+        <div class="container" style="overflow-y: scroll;">
+          <h1>Chat</h1>
+          <ul id="messagesList">
+            <!-- For loop logic of jinja template -->
+            {%for i in range(0, len)%}
+            <div style="display: flex; width: 100%; justify-content: center;">
+              <div style="width: 40%; display: flex; justify-content: flex-start;">{{message_list[i][1]}}</div>
+              <div style="width: 45%; display: flex; justify-content: flex-start;">{{message_list[i][0]}}</div>
+              <div style="width: 15%; display: flex; justify-content: center;">{{message_list[i][2]}}</div>
+            </div>
+            {%endfor%}
+          </ul>
+        </div>
+        <div class="container">
+          <h1>Online</h1>
+          <span >Count of active users: {{active_users_count}}</span>
+          <ul id="activity" style="margin-top: 1rem;">
+            {%for i in range(0, len_active_users_array)%}
+            <div style="display: flex; width: 100%; justify-content: center;">
+              <div style="width: 40%; display: flex; justify-content: center; align-items: center;">{{active_users_array[i]}} <div style="display: flex; align-items: center; border-radius: 50%; width: 0.5rem; height: 0.5rem; background-color: green; margin-left: 5px;"></div></div>
+            </div>
+            {%endfor%}
+          </ul>
+        </div>
+      </div>
+      <div style=" display: flex; justify-content: center; margin-top: 5rem;">
+        <a class="nav-link" href="/logout">
+          <button type="button" class="btn logout-btn btn-warning">Log out</button>
+        </a>
+      </div>
+      
+    </div>
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+  </body>
+</html>
